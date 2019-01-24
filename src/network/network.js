@@ -379,10 +379,25 @@ class VConsoleNetworkTab extends VConsolePlugin {
         if (tool.isString(data)) {
           let arr = data.split('&');
           item.postData = {};
-          for (let q of arr) {
-            q = q.split('=');
-            item.postData[ q[0] ] = q[1];
+
+          if (arr.length === 1) {
+            let posta = ''
+            try {
+              posta = JSON.parse(arr[0]);
+              posta = JSON.stringify(posta, null, 1);
+              posta = tool.htmlEncode(posta);
+            } catch (error) {
+              console.warn('无效的json串，将会采取默认处理方式处理');
+              posta = arr[0];
+            }
+            item.postData.Data = posta;
+          } else {
+            for (let q of arr) {
+              q = q.split('=');
+              item.postData[ q[0] ] = q[1];
+            }
           }
+
         } else if (tool.isPlainObject(data)) {
           item.postData = data;
         }
