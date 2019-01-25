@@ -7,6 +7,10 @@
   <dl class="vc-table-row">
     <dd class="vc-table-col">{{list[i].name}}</dd>
     <dd class="vc-table-col vc-table-col-2">{{list[i].value}}</dd>
+    <dd class="vc-table-col">
+      <button class="vc-table-col-button delete" data-name="{{list[i].name}}">删除</button>
+      <button class="vc-table-col-button change" data-name="{{list[i].name}}" data-value="{{list[i].value}}">修改</button>
+    </dd>
   </dl>
   {{/for}}
 </div>
